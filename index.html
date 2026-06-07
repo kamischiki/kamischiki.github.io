@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hanna Kamyshanska</title>
+  <meta name="description" content="Artist & data scientist. Oil paintings, charcoal drawings, sketch notes, and the Proyav iOS app.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────────── -->
+<nav aria-label="Main navigation">
+  
+<a href="#home" class="nav-logo" aria-label="Home">
+  <img src="images/profile/channels5_profile.jpg" alt="" class="nav-avatar">
+  <img src="images/profile/signature.svg" alt="Hanna Kamyshanska" class="nav-signature">
+</a>
+
+  <button class="nav-toggle" id="nav-toggle"
+    aria-controls="nav-menu" aria-expanded="false" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="nav-menu" id="nav-menu" role="list">
+    <li><a href="#art">Art</a></li>
+     <li><a href="#proyav">Proyav</a></li>
+    <li><a href="#notes">Sketch Notes</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO — full bleed painting, nothing else ─────────── -->
+<section id="home" aria-label="Introduction">
+  <img id="hero-img" src="" alt="" fetchpriority="high">
+  <span id="hero-caption" class="hero-caption"></span>
+  <a href="#art" class="hero-scroll-hint" aria-label="Scroll to work">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M10 3v14M4 11l6 6 6-6" stroke="currentColor" stroke-width="1.2"
+        stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+</section>
+
+<!-- ── ART ──────────────────────────────────────────────── -->
+<section id="art" aria-labelledby="art-title">
+  <div class="gallery-header fade-in">
+    <div>
+      <p class="section-label">Gallery</p>
+      <h2 class="section-title" id="art-title">Paintings &amp; Drawings</h2>
+    </div>
+    <div>
+      <p class="gallery-desc">
+        Oil, charcoal, acrylic — landscapes, portraits, still life.
+        From impressionistic to realistic, each piece is a study in seeing.
+      </p>
+      <ul class="gallery-filters" role="list" aria-label="Filter artworks" style="margin-top:1rem">
+        <li><button data-filter="all" class="active">All</button></li>
+        <li><button data-filter="painting">Paintings</button></li>
+        <li><button data-filter="drawing">Drawings</button></li>
+      </ul>
+    </div>
+  </div>
+  <div id="gallery-grid" role="list" aria-label="Artwork gallery"></div>
+</section>
+
+<!-- ── PROYAV ────────────────────────────────────────────── -->
+<section id="proyav" aria-labelledby="proyav-title">
+  <div class="proyav-inner">
+
+    <div class="proyav-title-block">
+      <h2 class="section-title fade-in" id="proyav-title">Proyav</h2>
+      <p id="proyav-pronunciation" class="proyav-pronunciation fade-in"></p>
+    </div>
+
+    <div id="proyav-screens" class="fade-in"></div>
+
+    <div class="proyav-details">
+      <p id="proyav-desc" class="fade-in"></p>
+      <div class="proyav-features-col">
+        <ul id="proyav-features" class="fade-in"></ul>
+        <a id="proyav-applink" href="#" target="_blank" rel="noopener" class="btn-appstore fade-in">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          Download for iPhone &amp; iPad
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ── SKETCH NOTES ──────────────────────────────────────── -->
+<section id="notes" aria-labelledby="notes-title">
+  <p class="section-label fade-in">Ideas Made Visible</p>
+  <h2 class="section-title fade-in" id="notes-title">Sketch Notes</h2>
+  <div id="notes-grid"></div>
+</section>
+
+<!-- ── ABOUT ─────────────────────────────────────────────── -->
+<section id="about" aria-labelledby="about-title">
+  <div class="about-inner">
+    <div id="about-photo-wrap" class="about-photo-wrap fade-in"></div>
+    <div class="fade-in">
+      <p class="section-label">About</p>
+      <h2 class="section-title" id="about-title">Hanna<br>Kamyshanska</h2>
+      <div id="about-body"></div>
+      <div id="about-tags" class="about-tags" style="margin-top:2rem"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ───────────────────────────────────────────── -->
+<section id="contact" aria-labelledby="contact-title">
+  <div class="contact-inner">
+    <div>
+      <p class="section-label fade-in">Get in touch</p>
+      <h2 class="section-title fade-in" id="contact-title">Let's talk</h2>
+      <p class="contact-desc fade-in">
+        Interested in a painting, have a question about Proyav,
+        or want to collaborate on something unexpected?
+      </p>
+      <div id="contact-links" class="fade-in"></div>
+    </div>
+
+    <div class="fade-in">
+      <h3 class="contact-form-title">Send a message</h3>
+      <form id="contact-form" novalidate>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn-send">Send message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────────────── -->
+<footer>
+  <p id="footer-links"></p>
+</footer>
+
+<!-- ── LIGHTBOX ──────────────────────────────────────────── -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" aria-label="Close">×</button>
+  <img id="lightbox-img" src="" alt="">
+  <p id="lightbox-caption"></p>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
