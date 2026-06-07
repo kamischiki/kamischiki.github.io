@@ -351,83 +351,127 @@ section {
 
 #notes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 
+/* Card is NOT an <a> anymore — it's a <div> with links inside */
 .note-card {
   border: 1px solid var(--border);
-  padding: 0;
   text-decoration: none;
   color: inherit;
   display: flex;
   flex-direction: column;
   background: var(--surface);
-  transition: border-color 0.2s, transform 0.25s;
+  transition: border-color 0.3s, box-shadow 0.3s;
   overflow: hidden;
+  position: relative;
 }
-.note-card:hover { border-color: var(--coral); transform: translateY(-4px); }
+.note-card:hover {
+  border-color: rgba(250,126,97,0.4);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+
+/* Thumbnail — image-first, square-ish for sketchnote proportions */
+.note-thumb-wrap {
+  position: relative;
+  overflow: hidden;
+  background: var(--warm);
+  aspect-ratio: 4/3;
+}
 
 .note-thumb {
   width: 100%;
-  aspect-ratio: 16/9;
+  height: 100%;
   object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
 }
+.note-card:hover .note-thumb { transform: scale(1.03); }
 
 .note-thumb-placeholder {
   width: 100%;
-  aspect-ratio: 16/9;
-  background: var(--warm);
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--muted);
+  color: rgba(232,228,220,0.12);
 }
-.note-thumb-placeholder svg { width: 44px; height: 44px; }
+.note-thumb-placeholder svg { width: 56px; height: 56px; }
 
-.note-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
-
+/* Topic chip overlaid on image bottom-left */
 .note-topic {
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--coral);
-  margin-bottom: 0.45rem;
+  background: rgba(23,22,22,0.82);
+  backdrop-filter: blur(6px);
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgba(250,126,97,0.25);
+}
+
+/* Text body */
+.note-body {
+  padding: 1.25rem 1.25rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .note-title {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 400;
-  line-height: 1.3;
-  margin-bottom: 0.75rem;
+  line-height: 1.35;
+  margin-bottom: 0.6rem;
+  color: var(--ink);
 }
 
 .note-desc {
-  font-size: 0.85rem;
+  font-size: 0.83rem;
   color: var(--muted);
   font-weight: 300;
   line-height: 1.75;
   flex: 1;
-  margin-bottom: 1.25rem;
 }
 
+/* Link footer — always at bottom, never wraps awkwardly */
 .note-links {
   display: flex;
-  gap: 1rem;
+  gap: 0;
+  margin-top: 1.1rem;
+  border-top: 1px solid var(--border);
 }
 
 .note-link {
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
+  flex: 1;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--muted);
   text-decoration: none;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0.15rem;
-  transition: border-color 0.2s, color 0.2s;
+  padding: 0.7rem 0.5rem;
+  text-align: center;
+  transition: color 0.2s, background 0.2s;
+  border-right: 1px solid var(--border);
+  line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
 }
-.note-link:hover { border-color: var(--coral); color: var(--coral); }
+.note-link:last-child { border-right: none; }
+.note-link:hover { color: var(--coral); background: rgba(250,126,97,0.06); }
+
+.note-link-icon { font-size: 0.85rem; opacity: 0.5; }
+
+/* No-links card: just bottom padding */
+.note-card.no-links .note-body { padding-bottom: 1.25rem; }
 
 /* ── Proyav ────────────────────────────────────────────────── */
 /* ── Proyav Section Redesign ── */

@@ -112,22 +112,50 @@ function buildSketchNotes(C) {
            </svg>
          </div>`;
 
-    const primaryUrl = note.youtube || note.medium || C.links.youtube;
-    const links = [
-      note.youtube ? `<a class="note-link" href="${note.youtube}" target="_blank" rel="noopener">Watch ↗</a>` : "",
-      note.medium  ? `<a class="note-link" href="${note.medium}"  target="_blank" rel="noopener">Read ↗</a>`  : "",
-    ].filter(Boolean).join("");
+    const linkDefs = [
+      note.medium     ? { href: note.medium,    icon: "📖", label: "Read" }       : null,
+      note.youtube    ? { href: note.youtube,   icon: "▶",  label: "Watch" }      : null,
+      note.youtubeUa  ? { href: note.youtubeUa, icon: "▶",  label: "Watch · UA" } : null,
+    ].filter(Boolean);
+
+    const hasLinks = linkDefs.length > 0;
+    const linksHtml = hasLinks
+      ? `<div class="note-links">
+          ${linkDefs.map(l => `
+            <a class="note-link" href="${l.href}" target="_blank" rel="noopener">
+              <span class="note-link-icon">${l.icon}</span>
+              ${l.label}
+            </a>`).join("")}
+        </div>`
+      : "";
 
     return `
-      <a class="note-card fade-in" href="${primaryUrl}" target="_blank" rel="noopener">
-        ${thumb}
-        <p class="note-topic">${note.topic}</p>
-        <h3 class="note-title">${note.title}</h3>
-        <p class="note-desc">${note.desc}</p>
-        <div class="note-links" onclick="event.stopPropagation()">${links}</div>
-      </a>
+      <div class="note-card fade-in${hasLinks ? "" : " no-links"}" data-topic="${note.topic || ""}">
+        <div class="note-thumb-wrap">
+          ${thumb}
+          ${note.topic ? `<span class="note-topic">${note.topic}</span>` : ""}
+        </div>
+        <div class="note-body">
+          <h3 class="note-title">${note.title}</h3>
+          ${note.desc ? `<p class="note-desc">${note.desc}</p>` : ""}
+        </div>
+        ${linksHtml}
+      </div>
     `;
   }).join("");
+
+  // Filter buttons
+  const filters = document.querySelectorAll("[data-notes-filter]");
+  filters.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filters.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const cat = btn.dataset.notesFilter;
+      grid.querySelectorAll(".note-card").forEach(card => {
+        card.style.display = (cat === "all" || card.dataset.topic === cat) ? "" : "none";
+      });
+    });
+  });
 }
 
 /* ── Proyav ───────────────────────────────────────────────── */
