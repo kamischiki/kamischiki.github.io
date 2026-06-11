@@ -51,8 +51,9 @@
 <section id="art" aria-labelledby="art-title">
   <div class="gallery-header fade-in">
     <div>
-      <p class="section-label">Gallery</p>
+      
       <h2 class="section-title" id="art-title">Paintings &amp; Drawings</h2>
+      <p class="section-label">Gallery</p>
     </div>
     <div>
       <p class="gallery-desc">
@@ -99,8 +100,8 @@
 <section id="notes" aria-labelledby="notes-title">
   <div class="gallery-header fade-in">
     <div>
-      <p class="section-label">Ideas Made Visible</p>
       <h2 class="section-title" id="notes-title">Sketch Notes</h2>
+      <p class="section-label">Ideas Made Visible</p>
     </div>
     <div>
       <p class="gallery-desc">
@@ -125,8 +126,8 @@
   <div class="about-inner">
     <div id="about-photo-wrap" class="about-photo-wrap fade-in"></div>
     <div class="fade-in">
-      <p class="section-label">About</p>
       <h2 class="section-title" id="about-title">Hanna<br>Kamyshanska</h2>
+      <p class="section-label">About</p>
       <div id="about-body"></div>
       <div id="about-tags" class="about-tags" style="margin-top:2rem"></div>
     </div>
@@ -135,34 +136,15 @@
 
 <!-- ── CONTACT ───────────────────────────────────────────── -->
 <section id="contact" aria-labelledby="contact-title">
-  <div class="contact-inner">
+  <div class="contact-inner contact-inner--links-only">
     <div>
       <p class="section-label fade-in">Get in touch</p>
-      <h2 class="section-title fade-in" id="contact-title">Let's talk</h2>
+     <!-- <h2 class="section-title fade-in" id="contact-title">Let's talk</h2> -->
       <p class="contact-desc fade-in">
         Interested in a painting, have a question about Proyav,
         or want to collaborate on something unexpected?
       </p>
       <div id="contact-links" class="fade-in"></div>
-    </div>
-
-    <div class="fade-in">
-      <h3 class="contact-form-title">Send a message</h3>
-      <form id="contact-form" novalidate>
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" autocomplete="name" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" autocomplete="email" required>
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" required></textarea>
-        </div>
-        <button type="submit" class="btn-send">Send message →</button>
-      </form>
     </div>
   </div>
 </section>
@@ -175,8 +157,16 @@
 <!-- ── LIGHTBOX ──────────────────────────────────────────── -->
 <div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
   <button class="lightbox-close" aria-label="Close">×</button>
-  <img id="lightbox-img" src="" alt="">
-  <p id="lightbox-caption"></p>
+  
+  <button id="lb-prev" class="lightbox-nav lb-prev" aria-label="Previous image">‹</button>
+  
+  <div class="lightbox-content">
+    <img id="lightbox-img" src="" alt="">
+    <p id="lightbox-caption"></p>
+    <div id="lb-counter" class="lightbox-counter"></div>
+  </div>
+
+  <button id="lb-next" class="lightbox-nav lb-prev" aria-label="Next image">›</button>
 </div>
 
 <script src="js/config.js"></script>
