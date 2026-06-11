@@ -90,14 +90,14 @@ nav {
   align-items: center;
   padding: 0 var(--section-h);
   
-  /* Solid, premium dark carbon background right from the start */
-  background: var(--base_background); 
-  border-bottom: 1px solid var(--border);
+  /* Transparent at top so hero bleeds through seamlessly */
+  background: transparent;
+  border-bottom: 1px solid transparent;
   
-  transition: background 0.3s ease, border-color 0.3s ease;
+  transition: background 0.35s ease, border-color 0.35s ease;
 }
 
-/* We no longer need to violently shift the background on scroll */
+/* Solid background once user scrolls down */
 nav.scrolled {
   background: var(--base_background);
   border-bottom-color: var(--border);
@@ -207,6 +207,17 @@ section {
   object-fit: cover;
   object-position: center;
   display: block;
+}
+
+/* Top gradient so signature/nav links stay legible over the hero */
+#home::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, rgba(23,22,22,0.55) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* Vignette so caption stays readable */
