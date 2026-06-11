@@ -24,8 +24,8 @@ Based in Frankfurt.
     medium:   "https://medium.com/@MarginsExplained",
     youtube:   "https://www.youtube.com/@MarginsExplained",
     youtube_ua: "https://www.youtube.com/@napolyah_sketches",
-   // github:   "https://github.com/kamishiki",
-    appstore: "https://apps.apple.com/app/proyav",
+    instagram: "https://www.instagram.com/hannakamyshanska/", // Add your Instagram link here
+    appstore: "https://apps.apple.com/de/app/proyav-artist-drawing-aid/id6761647351",
   },
 
   heroImages: [
@@ -151,7 +151,7 @@ drawings: [
       title:     "Jobs to Be Done",
       topic:     "Business",
       desc:     "Why people really buy things.",
-      thumbnail: "images/sketchnotes/jtbd.jpeg",        // drop your image here
+      thumbnail: "images/sketchnotes/JTBD.jpeg",        // drop your image here
       youtube:   "https://youtu.be/tuCOjql6cqM?si=x3r58LMOobTqOQkf",
       youtubeUa: "https://youtu.be/EJNpGujHBVE?si=Nc9y0Q8cfHWL4nDT",
       medium:    "",
