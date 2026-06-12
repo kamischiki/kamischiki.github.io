@@ -965,20 +965,20 @@ footer a:hover { color: var(--coral); }
 
   .nav-toggle { display: flex; }
 
-  #nav-menu {
-    position: fixed;
-    top: var(--nav-h);
-    left: 0; right: 0;
-    background: rgba(30,32,34,0.98);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    padding: 1.5rem;
-    flex-direction: column;
-    gap: 0;
-    border-bottom: 1px solid var(--border);
-    transform: translateY(-110%);
-    transition: transform 0.3s ease;
-  }
+#nav-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Fix 1: Ensure it has the carbon base background instead of transparency or surface-gray */
+  background: var(--base_background); 
+  padding: var(--nav-h) var(--section-h) 2rem var(--section-h);
+  border-bottom: 1px solid var(--border);
+  transform: translateY(-110%);
+  transition: transform 0.3s ease;
+  /* Fix 2: Give it a z-index layer, but make sure it plays nice with your logo */
+  z-index: 99; 
+}
   #nav-menu.open { transform: none; }
   #nav-menu li { border-bottom: 1px solid var(--border); }
   #nav-menu a { display: block; padding: 1rem 0; font-size: 0.85rem; color: var(--ink); }
