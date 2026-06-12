@@ -380,8 +380,9 @@ function buildFooter(C) {
     <a href="${C.links.youtube}"   target="_blank">YouTube</a> &nbsp;·&nbsp;
     <a href="${C.links.instagram}" target="_blank">Instagram</a> &nbsp;·&nbsp;
     <a href="${C.links.appstore}"  target="_blank">Proyav</a> &nbsp;·&nbsp;
-    <a href="impressum.html">Impressum</a>
-  `;
+    <a href="impressum.html">Impressum</a> &nbsp;·&nbsp;
+    <a href="privacy.html">Datenschutzerklärung</a>
+    `;
 }
 
 /* ── Lightbox ─────────────────────────────────────────────── */
