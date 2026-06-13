@@ -160,6 +160,8 @@ nav.scrolled {
 .nav-menu a:hover {
   color: #ffffff;
 }
+/* Legal links (Impressum/Datenschutz) — only shown in the mobile menu */
+.nav-legal { display: none; }
 /* Hamburger — hidden on desktop */
 .nav-toggle {
   display: none;
@@ -970,18 +972,52 @@ footer a:hover { color: var(--coral); }
   top: 0;
   left: 0;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
   /* Fix 1: Ensure it has the carbon base background instead of transparency or surface-gray */
-  background: var(--base_background); 
-  padding: var(--nav-h) var(--section-h) 2rem var(--section-h);
+  background: var(--base_background);
+  padding: calc(var(--nav-h) + env(safe-area-inset-top)) var(--section-h) 2rem var(--section-h);
   border-bottom: 1px solid var(--border);
   transform: translateY(-110%);
   transition: transform 0.3s ease;
   /* Fix 2: Give it a z-index layer, but make sure it plays nice with your logo */
-  z-index: 99; 
+  z-index: 99;
+  list-style: none;
+  margin: 0;
 }
-  #nav-menu.open { transform: none; }
-  #nav-menu li { border-bottom: 1px solid var(--border); }
-  #nav-menu a { display: block; padding: 1rem 0; font-size: 0.85rem; color: var(--ink); }
+  #nav-menu.open {
+    display: flex;
+    flex-direction: column;
+    transform: none;
+  }
+  #nav-menu li { width: 100%; border-bottom: 1px solid var(--border); }
+  #nav-menu a {
+    display: block;
+    width: 100%;
+    padding: 1rem 0;
+    font-size: 0.85rem;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  /* Legal links — shown inside the mobile menu only */
+  #nav-menu .nav-legal {
+    display: block;
+    border-bottom: none;
+  }
+  #nav-menu .nav-legal:first-of-type {
+    margin-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  #nav-menu .nav-legal a {
+    padding: 0.75rem 0;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
 
   /* Hero — full bleed, shorter on mobile */
   #home { height: 70vw; min-height: 320px; max-height: 85vh; }
