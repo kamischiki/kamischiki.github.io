@@ -218,6 +218,77 @@ nav.scrolled {
 .nav-menu a:hover {
   color: #ffffff;
 }
+/* "Apps" dropdown */
+.nav-dropdown { position: relative; }
+.nav-dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(232, 228, 220, 0.65);
+  transition: color 0.3s ease;
+}
+.nav-dropdown-toggle::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  margin-left: 0.7rem;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.2s ease;
+}
+.nav-dropdown-toggle:hover,
+.nav-dropdown.open .nav-dropdown-toggle { color: #ffffff; }
+.nav-dropdown.open .nav-dropdown-toggle::after { transform: rotate(-135deg) translateY(-1px); }
+
+.nav-submenu {
+  position: absolute;
+  top: 100%;
+  left: -1rem;
+  min-width: 210px;
+  margin: 0;
+  padding: 0.5rem;
+  list-style: none;
+  background: var(--base_background);
+  border: 1px solid var(--border);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+.nav-dropdown.open .nav-submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+@media (hover: hover) {
+  .nav-dropdown:not(.no-hover):hover .nav-submenu { opacity: 1; visibility: visible; transform: none; }
+  .nav-dropdown:not(.no-hover):hover .nav-dropdown-toggle { color: #ffffff; }
+}
+.nav-submenu a {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.6rem 0.75rem;
+  letter-spacing: 0.12em;
+}
+.nav-submenu a:hover { background: var(--surface); }
+.nav-app-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 22%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 /* Legal links (Impressum/Datenschutz) — only shown in the mobile menu */
 .nav-legal { display: none; }
 /* Hamburger — hidden on desktop */
@@ -549,18 +620,28 @@ section {
 /* No-links card: just bottom padding */
 .note-card.no-links .note-body { padding-bottom: 1.25rem; }
 
-/* ── Proyav ────────────────────────────────────────────────── */
-/* ── Proyav Section Redesign ── */
-.proyav-title-block {
-  gap: 0.25rem;
+/* ── App sections (Proyav, Arkusch, …) ─────────────────────── */
+.app-title-block {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 0;
+}
+.app-logo {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 22%;
+  object-fit: cover;
+  border: 1px solid rgba(240, 235, 226, 0.12);
+}
+.app-title-text .section-title { margin-bottom: 0.25rem; }
+
+.app-title-block .section-title {
   margin-bottom: 0;
 }
 
-.proyav-title-block .section-title {
-  margin-bottom: 0;
-}
-
-.proyav-pronunciation {
+.app-subtitle {
   font-family: var(--font-display);
   font-style: italic;
   font-size: 0.95rem;
@@ -569,7 +650,7 @@ section {
   opacity: 0.8;
 }
 
-.proyav-meta {
+.app-meta {
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -577,22 +658,22 @@ section {
   flex-wrap: wrap;
 }
 
-.proyav-meta .section-label {
+.app-meta .section-label {
   margin-bottom: 0;
 }
 
-#proyav {
+.app-section {
   background: #1c1c1a;
   color: #f0ebe2;
   padding: 5rem 0;
 }
-#proyav .section-title { 
+.app-section .section-title { 
   color: #f0ebe2; 
   font-size: 2.5rem;
   margin: 0.25rem 0 1rem 0; 
   text-transform: uppercase;
 }
-#proyav .section-label { 
+.app-section .section-label { 
   color: var(--coral); 
   font-size: 0.75rem;
   letter-spacing: 0.15em;
@@ -600,7 +681,7 @@ section {
 }
 
 /* Master inner wrapper forced into a strict top-down layout column */
-.proyav-inner {
+.app-inner {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
@@ -610,7 +691,7 @@ section {
 }
 
 /* Row 1: The Horizontal Screenshot Track */
-#proyav-screens {
+.app-screens {
   display: flex;
   gap: 0.75rem; /* Tight, premium clustering */
   overflow-x: auto;
@@ -618,12 +699,12 @@ section {
   padding: 1rem 0;
   scrollbar-width: none;
 }
-#proyav-screens::-webkit-scrollbar {
+.app-screens::-webkit-scrollbar {
   display: none;
 }
 
 /* Flat, pristine uniform application cards */
-.proyav-screen {
+.app-screen {
   flex: 0 0 160px;
   width: 160px;
   height: auto;
@@ -634,12 +715,12 @@ section {
   margin: 0 !important;
   transition: transform 0.3s ease;
 }
-.proyav-screen:hover {
+.app-screen:hover {
   transform: translateY(-4px) !important;
 }
 
 /* Row 2: Bottom Details Component split cleanly on desktop */
-.proyav-details {
+.app-details {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
   gap: 3rem;
@@ -647,18 +728,18 @@ section {
 }
 
 @media (max-width: 767px) {
-  .proyav-details { grid-template-columns: 1fr; }
-  .proyav-meta { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .app-details { grid-template-columns: 1fr; }
+  .app-meta { flex-direction: column; align-items: flex-start; gap: 1rem; }
 }
 
-#proyav-desc {
+.app-desc {
   font-size: 1.1rem;
   line-height: 1.65;
   color: rgba(240, 235, 226, 0.85);
   margin-bottom: 2rem;
 }
 
-#proyav-features {
+.app-features {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -666,16 +747,33 @@ section {
   padding: 0;
 }
 
-.proyav-features-col {
+.app-features-col {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.proyav-features-col .btn-appstore {
-  align-self: flex-start;
+.app-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
   margin-top: 2rem;
 }
-#proyav-features li {
+.app-link {
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: rgba(240, 235, 226, 0.7);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+.app-link:hover { color: var(--coral); }
+/* a second app section follows the first one */
+.app-section { scroll-margin-top: 2rem; }
+.app-section + .app-section {
+  border-top: 1px solid rgba(240, 235, 226, 0.08);
+}
+.app-features li {
   display: grid;
   grid-template-columns: 90px 1fr;
   column-gap: 0.5rem;
@@ -685,7 +783,7 @@ section {
   padding-left: 0;
 }
 
-#proyav-features li::before { display: none; }
+.app-features li::before { display: none; }
 
 .feature-heading {
   font-size: 0.72rem;
@@ -718,17 +816,17 @@ section {
 
 /* Desktop Grid Adjustments */
 @media (min-width: 768px) {
-  .proyav-details {
+  .app-details {
     
     align-items: start;
   }
-  #proyav-features {
+  .app-features {
     grid-template-columns: 1fr 1fr;
   }
-  #proyav-screens {
+  .app-screens {
     justify-content: center;
   }
-  .proyav-screen {
+  .app-screen {
     flex: 1 1 0;
     width: auto;
     max-width: 220px;
@@ -1004,8 +1102,8 @@ footer a:hover { color: var(--coral); }
 
   /* gallery columns handled by JS masonry */
 
-  .proyav-inner { gap: 3rem; }
-  .proyav-screen { width: 150px; }
+  .app-inner { gap: 3rem; }
+  .app-screen { width: 150px; }
 
   .about-inner { gap: 3.5rem; }
   .contact-inner { gap: 3.5rem; }
@@ -1060,6 +1158,38 @@ footer a:hover { color: var(--coral); }
     white-space: nowrap;
   }
 
+  /* "Apps" dropdown — expands inline inside the mobile menu */
+  #nav-menu .nav-dropdown-toggle {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem 0;
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+  #nav-menu .nav-submenu {
+    position: static;
+    display: none;
+    min-width: 0;
+    padding: 0 0 0.75rem;
+    border: none;
+    background: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  #nav-menu .nav-dropdown.open .nav-submenu { display: block; }
+  #nav-menu .nav-submenu li { border-bottom: none; }
+  #nav-menu .nav-submenu a {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.6rem 0;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+  }
+  #nav-menu .nav-submenu a:hover { background: none; }
+
   /* Legal links — shown inside the mobile menu only */
   #nav-menu .nav-legal {
     display: block;
@@ -1087,12 +1217,13 @@ footer a:hover { color: var(--coral); }
   /* Notes — single col */
   #notes-grid { grid-template-columns: 1fr; }
 
-  /* Proyav — stacked */
-  .proyav-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-  #proyav-screens { order: -1; }
-  .proyav-screen { width: 130px; border-radius: 14px; }
-  .proyav-screen:first-child { transform: rotate(-2deg) translateY(12px); }
-  .proyav-screen:last-child  { transform: rotate(2deg)  translateY(6px); }
+  /* Apps — stacked */
+  .app-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .app-logo { width: 56px; height: 56px; }
+  .app-screens { order: -1; }
+  .app-screen { width: 130px; border-radius: 14px; }
+  .app-screen:first-child { transform: rotate(-2deg) translateY(12px); }
+  .app-screen:last-child  { transform: rotate(2deg)  translateY(6px); }
 
   /* About — stacked */
   .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }

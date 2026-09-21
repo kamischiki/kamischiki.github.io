@@ -12,6 +12,7 @@ const SITE_CONFIG = {
     Both are about looking past what you expect to see and finding what's actually there.
     <br><br>
 I built Proyav when I couldn't find the drawing tool I wanted: one that helps you see your own work with fresh eyes.
+<br><br>And I built Arkusch because my plant collection kept growing and I needed a way to keep track of it.
 <br><br>
 During my PhD in computational neuroscience and years in industry I kept noticing: the best explanations are never in the official guides — they're scribbled in the margins, hidden in analogies, mapped from unexpected connections. And so my sketch notes were born — translating "boring" ideas from tech, business, and design into something you can understand in a glance.
 <br><br>
@@ -25,7 +26,6 @@ Based in Frankfurt.
     youtube:   "https://www.youtube.com/@MarginsExplained",
     youtube_ua: "https://www.youtube.com/@napolyah_sketches",
     instagram: "https://www.instagram.com/hannakamyshanska/", // Add your Instagram link here
-    appstore: "https://apps.apple.com/de/app/proyav-artist-drawing-aid/id6761647351",
   },
 
   heroImages: [
@@ -78,7 +78,7 @@ drawings: [
    sketchNotes: [
            {
       title:     "Technical Debt",
-      topic:     "Thech",
+      topic:     "Tech",
       desc:      "They are in the walls...",
       thumbnail: "images/sketchnotes/tech_debt.png",        // drop your image here
       youtube:   "https://youtu.be/nP2n61zexs4?si=BRvENFNudyoL9M6-",
@@ -168,28 +168,65 @@ drawings: [
     },
   ],
   
-// ----------------- PROYAV -------------------------
-  proyav: {
-    tagline: "A drawing aid built by an artist, for artists.",
-    pronunciation: "proh-yav · Прояв · revelation, manifestation, display, development",
-    desc: `Your brain is a liar. It fills in what it expects to see — not what's actually there. That's why your teacher's eye catches what yours misses.
+// ----------------- APPS -------------------------
+  // One entry per app; each becomes its own section on the page.
+  // Anchors: #proyav, #arkusch (from `id`); the nav "Apps" dropdown is built from this list too.
+  // `logo` is optional. Leave `screens` empty to hide the screenshot row,
+  // leave `appstore` empty to hide the download button.
+  apps: [
+    {
+      id: "proyav",
+      name: "Proyav",
+      logo: "images/proyav/logo.png",
+      subtitle: "proh-yav · Прояв · revelation, manifestation, display, development",
+      tagline: "A drawing aid built by an artist, for artists.",
+      appstore: "https://apps.apple.com/de/app/proyav-artist-drawing-aid/id6761647351",
+      buttonLabel: "Download for iPhone &amp; iPad",
+      desc: `Your brain is a liar. It fills in what it expects to see — not what's actually there. That's why your teacher's eye catches what yours misses.
 
 PROYAV gives you that second eye. Mid-session, on your own, whenever you need it. Point your camera at your reference or your artwork and see it differently.`,
-    features: [
-      { heading: "SEE",     text: "Flip horizontal, vertical, rotate. Your brain can't lie about a reversed image." },
-      { heading: "MEASURE", text: "Overlay the golden ratio spiral, Loomis head, or figure canon directly onto your work." },
-      { heading: "FEEL",    text: "Blur your drawing to see values. Push contrast or switch to grayscale to reveal structure." },
-      { heading: "TRAIN",   text: "A daily prompt. A dot for every day you showed up. 500 prompts across 14 topics." },
-      { heading: "OFFLINE BY DESIGN",   text: "No cloud. No accounts. No subscription. Your drawings stay on your phone. " }
-    ],
-    screens: [
-      "images/proyav/Slice%201.png",
-      "images/proyav/Slice%202.png",
-      "images/proyav/Slice%203.png",
-      "images/proyav/Slice%204.png",
-      "images/proyav/Slice%205.png",
-    ],
-  },
+      features: [
+        { heading: "SEE",     text: "Flip horizontal, vertical, rotate. Your brain can't lie about a reversed image." },
+        { heading: "MEASURE", text: "Overlay the golden ratio spiral, Loomis head, or figure canon directly onto your work." },
+        { heading: "FEEL",    text: "Blur your drawing to see values. Push contrast or switch to grayscale to reveal structure." },
+        { heading: "TRAIN",   text: "A daily prompt. A dot for every day you showed up. 500 prompts across 14 topics." },
+        { heading: "OFFLINE BY DESIGN",   text: "No cloud. No accounts. No subscription. Your drawings stay on your phone. " }
+      ],
+      screens: [
+        "images/proyav/Slice%201.png",
+        "images/proyav/Slice%202.png",
+        "images/proyav/Slice%203.png",
+        "images/proyav/Slice%204.png",
+        "images/proyav/Slice%205.png",
+      ],
+    },
+
+    {
+      id: "arkusch",
+      name: "Arkusch",
+      logo: "images/arkusch/logo.png",
+      subtitle: "ar-koosh · Аркуш · sheet of paper, leaf, page",
+      tagline: "Index for plant collectors",
+      appstore: "https://apps.apple.com/de/app/arkusch/id6786742492",
+      buttonLabel: "Download for iPhone, iPad &amp; Mac",
+      desc: `Plant care is self care.
+
+I made Arkusch to bring order to my own plant collection: one place for everything important.`,
+      features: [
+        { heading: "TRACK",   text: "Not just name and photo: tags, links, location, events, purchase price, and anything else that matters in your own custom fields." },
+        { heading: "REMIND",  text: "Plant-specific reminders. When you complete one, it can be converted into an event on that plant." },
+        { heading: "PROTECT", text: "Import from CSV, sync with iCloud, export backups. Your collection stays yours." },
+        { heading: "SPEAK",   text: "English, Deutsch, Українська." }
+      ],
+      screens: [
+        "images/arkusch/Slice%201.png",
+        "images/arkusch/Slice%202.png",
+        "images/arkusch/Slice%204.png",
+        "images/arkusch/Slice%205.png",
+        "images/arkusch/Slice%206.png",
+      ],
+    },
+  ],
 
   profilePhoto: "bio_foto_tall.jpg",
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Hanna Kamyshanska</title>
-  <meta name="description" content="Artist & data scientist. Oil paintings, charcoal drawings, sketch notes, and the Proyav iOS app.">
+  <meta name="description" content="Artist & data scientist. Oil paintings, charcoal drawings, sketch notes, and the apps Proyav and Arkusch.">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -25,7 +25,11 @@
 
   <ul class="nav-menu" id="nav-menu" role="list">
     <li><a href="#art">Art</a></li>
-     <li><a href="#proyav">Proyav</a></li>
+    <li class="nav-dropdown" id="nav-apps">
+      <button type="button" class="nav-dropdown-toggle" aria-haspopup="true"
+        aria-expanded="false" aria-controls="nav-apps-menu">Apps</button>
+      <ul class="nav-submenu" id="nav-apps-menu" role="list"></ul>
+    </li>
     <li><a href="#notes">Sketch Notes</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -69,32 +73,9 @@
   <div id="gallery-grid" role="list" aria-label="Artwork gallery"></div>
 </section>
 
-<!-- ── PROYAV ────────────────────────────────────────────── -->
-<section id="proyav" aria-labelledby="proyav-title">
-  <div class="proyav-inner">
+<!-- ── APPS — one section per app, built from SITE_CONFIG.apps ── -->
+<div id="apps"></div>
 
-    <div class="proyav-title-block">
-      <h2 class="section-title fade-in" id="proyav-title">Proyav</h2>
-      <p id="proyav-pronunciation" class="proyav-pronunciation fade-in"></p>
-    </div>
-
-    <div id="proyav-screens" class="fade-in"></div>
-
-    <div class="proyav-details">
-      <p id="proyav-desc" class="fade-in"></p>
-      <div class="proyav-features-col">
-        <ul id="proyav-features" class="fade-in"></ul>
-        <a id="proyav-applink" href="#" target="_blank" rel="noopener" class="btn-appstore fade-in">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-          </svg>
-          Download for iPhone &amp; iPad
-        </a>
-      </div>
-    </div>
-
-  </div>
-</section>
 <!-- ── SKETCH NOTES ──────────────────────────────────────── -->
 <section id="notes" aria-labelledby="notes-title">
   <div class="gallery-header fade-in">
@@ -140,7 +121,7 @@
       <p class="section-label fade-in">Get in touch</p>
      <!-- <h2 class="section-title fade-in" id="contact-title">Let's talk</h2> -->
       <p class="contact-desc fade-in">
-        Interested in a painting, have a question about Proyav,
+        Interested in a painting, have a question about Proyav or Arkusch,
         or want to collaborate on something unexpected?
       </p>
       <div id="contact-links" class="fade-in"></div>

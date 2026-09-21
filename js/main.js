@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   setIdentity(C);
   buildHero(C);
   buildGallery(C);
-  buildProyav(C);
+  buildApps(C);
+  buildNavApps(C);
   buildSketchNotes(C);
   buildAbout(C);
   buildContact(C);
@@ -302,24 +303,74 @@ function attachNotesLightbox(grid) {
   });
 }
 
-/* ── Proyav ───────────────────────────────────────────────── */
-function buildProyav(C) {
-  const p = C.proyav;
-  const pronunciation = document.getElementById("proyav-pronunciation");
-  const desc = document.getElementById("proyav-desc");
-  const features = document.getElementById("proyav-features");
-  const screens = document.getElementById("proyav-screens");
-  const appLink = document.getElementById("proyav-applink");
+/* ── Apps (Proyav, Arkusch, …) ───────────────────────────── */
+const APPLE_ICON = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+</svg>`;
 
-  if (pronunciation) pronunciation.textContent = p.pronunciation || "";
-  if (desc) desc.innerHTML = p.desc.replace(/\n/g, "<br>");
-if (features) features.innerHTML = p.features
-  .map(f => `<li><span class="feature-heading">${f.heading}</span><span class="feature-text">${f.text}</span></li>`).join("");
-  if (screens) screens.innerHTML = p.screens
-    .map((s, i) => `<div class="proyav-screen">
-      <img src="${s}" alt="Proyav app screenshot ${i + 1}" loading="lazy">
-    </div>`).join("");
-  if (appLink) appLink.href = C.links.appstore;
+function buildApps(C) {
+  const wrap = document.getElementById("apps");
+  if (!wrap || !C.apps || !C.apps.length) return;
+
+  wrap.innerHTML = C.apps.map(app => {
+    const screens = (app.screens || []).map((s, i) => `
+      <div class="app-screen">
+        <img src="${s}" alt="${app.name} app screenshot ${i + 1}" loading="lazy">
+      </div>`).join("");
+
+    const features = (app.features || []).map(f => `
+      <li><span class="feature-heading">${f.heading}</span><span class="feature-text">${f.text}</span></li>`).join("");
+
+    const button = app.appstore
+      ? `<a href="${app.appstore}" target="_blank" rel="noopener" class="btn-appstore">
+           ${APPLE_ICON}${app.buttonLabel || "Download on the App Store"}
+         </a>`
+      : "";
+
+    const extra = (app.links || []).map(l =>
+      `<a class="app-link" href="${l.href}" target="_blank" rel="noopener">${l.label}</a>`).join("");
+
+    return `
+      <section id="${app.id}" class="app-section" aria-labelledby="${app.id}-title">
+        <div class="app-inner">
+
+          <div class="app-title-block">
+            ${app.logo ? `<img class="app-logo fade-in" src="${app.logo}" alt="" onerror="this.remove()">` : ""}
+            <div class="app-title-text">
+              <h2 class="section-title fade-in" id="${app.id}-title">${app.name}</h2>
+              ${app.subtitle ? `<p class="app-subtitle fade-in">${app.subtitle}</p>` : ""}
+            </div>
+          </div>
+
+          ${screens ? `<div class="app-screens fade-in">${screens}</div>` : ""}
+
+          <div class="app-details">
+            <p class="app-desc fade-in">${(app.desc || "").replace(/\n/g, "<br>")}</p>
+            <div class="app-features-col">
+              <ul class="app-features fade-in">${features}</ul>
+              ${(button || extra) ? `<div class="app-actions fade-in">${button}${extra}</div>` : ""}
+            </div>
+          </div>
+
+        </div>
+      </section>`;
+  }).join("");
+}
+
+/* ── Nav: "Apps" dropdown (one entry per app) ─────────────── */
+function buildNavApps(C) {
+  const menu = document.getElementById("nav-apps-menu");
+  const item = document.getElementById("nav-apps");
+  if (!menu || !item) return;
+  if (!C.apps || !C.apps.length) { item.remove(); return; }
+
+  menu.innerHTML = C.apps.map(app => `
+    <li>
+      <a href="#${app.id}">
+        ${app.logo ? `<img class="nav-app-logo" src="${app.logo}" alt="" onerror="this.remove()">` : ""}
+        <span>${app.name}</span>
+      </a>
+    </li>`).join("");
 }
 
 /* ── About ────────────────────────────────────────────────── */
@@ -374,12 +425,15 @@ function buildContact(C) {
 function buildFooter(C) {
   const footer = document.getElementById("footer-links");
   if (!footer) return;
+  const appLinks = (C.apps || []).filter(a => a.appstore)
+    .map(a => `<a href="${a.appstore}" target="_blank" rel="noopener">${a.name}</a> &nbsp;·&nbsp;`)
+    .join("\n    ");
   footer.innerHTML = `
     © ${new Date().getFullYear()} ${C.name} &nbsp;·&nbsp;
     <a href="${C.links.medium}"    target="_blank">Medium</a> &nbsp;·&nbsp;
     <a href="${C.links.youtube}"   target="_blank">YouTube</a> &nbsp;·&nbsp;
     <a href="${C.links.instagram}" target="_blank">Instagram</a> &nbsp;·&nbsp;
-    <a href="${C.links.appstore}"  target="_blank">Proyav</a> &nbsp;·&nbsp;
+    ${appLinks}
     <a href="impressum.html">Impressum</a> &nbsp;·&nbsp;
     <a href="privacy.html">Datenschutzerklärung</a>
     `;
@@ -490,6 +544,30 @@ function initNav() {
   nav.addEventListener("click", () => {
     if (lightboxOpen) closeLightbox();
   });
+
+  // "Apps" dropdown: click/tap or keyboard toggles it; hover also opens it on desktop (CSS)
+  const dd = document.getElementById("nav-apps");
+  const ddToggle = dd && dd.querySelector(".nav-dropdown-toggle");
+  if (dd && ddToggle) {
+    const setOpen = open => {
+      dd.classList.toggle("open", open);
+      ddToggle.setAttribute("aria-expanded", open);
+    };
+    ddToggle.addEventListener("click", e => {
+      e.stopPropagation();
+      setOpen(!dd.classList.contains("open"));
+    });
+    dd.addEventListener("mouseleave", () => {
+      dd.classList.remove("no-hover");
+      if (window.matchMedia("(hover: hover)").matches) setOpen(false);
+    });
+    document.addEventListener("click", e => { if (!dd.contains(e.target)) setOpen(false); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") setOpen(false); });
+    dd.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+      setOpen(false);
+      dd.classList.add("no-hover");   // keep it closed while the pointer is still over it
+    }));
+  }
 
   // Mobile menu toggle
   const toggle = document.getElementById("nav-toggle");
